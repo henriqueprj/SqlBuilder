@@ -8,7 +8,7 @@ using Xunit.Sdk;
 
 namespace rahhh.SqlBuilder.Tests
 {
-    public class ExpressionsTests
+    public class ExpressionsTest
     {
         [Fact]
         public void Test1()
@@ -56,23 +56,6 @@ namespace rahhh.SqlBuilder.Tests
                     .Should().Be("3 = 3");    
             }
         }
-
-        // [Fact]
-        // public void TestarGeradorSql()
-        // {
-        //     var a = new ConditionExpression("A = 1");
-        //     var b = new ConditionExpression("B = 2");
-        //     var c = new ConditionExpression("C = 3");
-        //     var d = new ConditionExpression("D = 4");
-        //     var e = new ConditionExpression("E = 5");
-            
-        //     var expr = a || b || c && d && e;
-            
-        //     var visitor = new SqlExpressionVisitor();
-        //     var (sql, parameters) = visitor.Build(expr);
-
-        //     sql.Should().Be("A = 1 OR B = 2 OR C = 3 AND D = 4 AND E = 5");
-        // }
 
         [Fact]
         public void AorB()
@@ -137,15 +120,6 @@ namespace rahhh.SqlBuilder.Tests
             
             var expr = a || b && c;
 
-            // var expr =
-            //     Expression.Or(
-            //         a,
-            //         Expression.And(
-            //             b,
-            //             c
-            //         )
-            //     );
-            
             var sql = Eval(expr);
 
             sql.Should().Be("A OR B AND C");
@@ -191,10 +165,10 @@ namespace rahhh.SqlBuilder.Tests
             sql.Should().Be("");
         }
 
-        private string Eval(Expression expr)
+        private static string Eval(Expression expr)
         {
-            var visitor = new SqlExpressionVisitor();
-            var (sql, _) = visitor.Build(expr);
+            var visitor = new SqlGeneratorVisitor();
+            var sql = visitor.Evaluate(expr);
             return sql;
         }
     }

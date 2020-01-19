@@ -13,5 +13,7 @@
             Left = left;
             Right = right;
         }
+
+        public abstract BinaryExpression Create(Expression left, Expression right);
     }
 }

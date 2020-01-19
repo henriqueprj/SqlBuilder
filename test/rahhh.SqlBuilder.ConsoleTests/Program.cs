@@ -60,8 +60,8 @@ namespace rahhh.SqlBuilder.ConsoleTests
 
         private static string RenderSql(Expression expression)
         {
-            var visitor = new SqlExpressionVisitor();
-            var (sql, _) = visitor.Build(expression);
+            var visitor = new SqlGeneratorVisitor();
+            var sql = visitor.Evaluate(expression);
             return sql;
         }
         

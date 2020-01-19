@@ -2,18 +2,16 @@ using rahhh.SqlBuilder.Abstractions;
 
 namespace rahhh.SqlBuilder.Expressions
 {
-    public class NotExpression : BooleanExpression
+    public sealed class NotExpression : UnaryExpression
     {
-        public BooleanExpression Operand { get; }
-        
-        public NotExpression(BooleanExpression expression)
+        public NotExpression(BooleanExpression expression) 
+            : base(expression)
         {
-            Guard.NotNull(expression, nameof(expression));
-            
-            Operand = expression;
         }
         
         public override void Accept(IExpressionVisitor visitor) => visitor.Visit(this);
+        
+        public override UnaryExpression Create(BooleanExpression expression) => new NotExpression(expression);
     }
 
     public partial class BooleanExpression

@@ -9,6 +9,9 @@ namespace rahhh.SqlBuilder.Expressions
         }
 
         public override void Accept(IExpressionVisitor visitor) => visitor.Visit(this);
+
+        public override BinaryExpression Create(Expression left, Expression right) => new OrExpression(left, right);
+        
     }
 
     public partial class BooleanExpression

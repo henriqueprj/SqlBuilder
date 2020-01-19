@@ -10,5 +10,6 @@ namespace rahhh.SqlBuilder.Abstractions
         void Visit(SqlParameterExpression expr);
         void Visit(EmptyExpression expr);
         void Visit(NotExpression expr);
+        void Visit(WhereExpression expr);
     }
 }
